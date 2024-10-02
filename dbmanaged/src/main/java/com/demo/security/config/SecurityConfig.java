@@ -3,6 +3,7 @@ package com.demo.security;
 import com.demo.security.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,13 +29,14 @@ public class SecurityConfig {
                                 .requestMatchers("/account/**").hasRole("USER")
                                 .anyRequest().authenticated()
                 )
-//                .formLogin(form -> form
-//                        .loginPage("/login")
-//                        .permitAll()
-//                )
-//                .logout(logout -> logout
-//                        .permitAll()
-//                )
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .permitAll()
+                )
                 // Set frame options to allow H2 console
                 .cors(cors->cors.configurationSource(corsConfigurationSource()))
                 .headers(headers -> headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()));  // Allow frames for H2 console

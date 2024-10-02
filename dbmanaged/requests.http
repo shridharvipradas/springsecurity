@@ -1,2 +1,17 @@
-###
+
+### GET request to the /account API with Basic Auth
+
 GET http://localhost:8080/account/{{accountId}}
+Authorization: Basic {{base64encodedCredentials}}
+Content-Type: application/json
+
+### Example POST request to create an account (requires authentication)
+POST http://localhost:8080/account
+Authorization: Basic {{base64encodedCredentials}}
+Content-Type: application/json
+
+{
+  "accountName": "Savings",
+  "accountType": "Personal",
+  "balance": 1000
+}
